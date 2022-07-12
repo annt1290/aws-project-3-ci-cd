@@ -207,13 +207,15 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum install -y tar gzip nodejs npm --enablerepo=epel
+            curl -sL https://rpm.nodesource.com/setup_13.x | bash -
+            yum install -y nodejs tar gzip
       - run:
           name: Get backend url
           command: |
             export BACKEND_IP=$(aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters "Name=tag:project,Values=udapeople")
+              --filters "Name=tag:project,Values=udapeople" \
+              --output text)
             export API_URL="http://${BACKEND_IP}:3030"
             echo "API_URL = ${API_URL}"
             echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
