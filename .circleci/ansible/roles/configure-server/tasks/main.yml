@@ -23,3 +23,8 @@
     global: yes
     production: yes
     state: present
+
+- name: "create ~/web directory"
+  file:
+    path: ~/web
+    state: directory

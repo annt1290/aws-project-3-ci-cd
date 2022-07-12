@@ -236,6 +236,8 @@ jobs:
       - image: python:3.7-alpine3.11
     steps:
       - checkout
+      - restore_cache:
+          keys: [backend-build]
       - add_ssh_keys:
           fingerprints: ["ab:5c:1e:9d:48:cd:35:0c:ef:c0:38:8b:3e:a2:89:70"]
       - attach_workspace:
@@ -243,7 +245,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update tar gzip ansible nodejs openssh
+            apk add --update tar gzip ansible nodejs npm openssh
             pip3 install awscli
       - run:
           name: Deploy backend
