@@ -24,7 +24,7 @@
     production: yes
     state: present
 
-- name: "create ~/web directory"
+- name: "create /var/www directory"
   file:
-    path: ~/web
+    path: /var/www
     state: directory
