@@ -23,8 +23,3 @@
     global: yes
     production: yes
     state: present
-
-- name: "create /var/www directory"
-  file:
-    path: /var/www
-    state: directory
