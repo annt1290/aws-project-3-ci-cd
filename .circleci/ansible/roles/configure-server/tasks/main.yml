@@ -23,3 +23,5 @@
     global: yes
     production: yes
     state: present
+
+- include_tasks: prometheus-node-exporter.yml
