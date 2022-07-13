@@ -337,8 +337,6 @@ jobs:
           command: |
             curl -sL https://rpm.nodesource.com/setup_13.x | bash -
             yum install -y tar gzip nodejs
-      - attach_workspace:
-          at: ~/
       - run:
           name: Update cloudfront distribution
           command: |
@@ -355,6 +353,10 @@ jobs:
 
             echo WorkflowID: "udapeople-${CIRCLE_WORKFLOW_ID:0:7}"
             echo OldWorkflowID: "${OldWorkflowID}"
+      - persist_to_workspace:
+          root: ~/
+          paths: 
+            - OldWorkflowID.txt
       - destroy-environment:
           workflow-id: ${CIRCLE_WORKFLOW_ID:0:7}
       - revert-migrations:
