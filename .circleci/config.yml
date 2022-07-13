@@ -332,13 +332,13 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      - attach_workspace:
-          at: ~/
       - run:
           name: Install dependencies
           command: |
             curl -sL https://rpm.nodesource.com/setup_13.x | bash -
-            yum install -y nodejs
+            yum install -y tar gzip nodejs
+      - attach_workspace:
+          at: ~/
       - run:
           name: Update cloudfront distribution
           command: |
@@ -365,6 +365,10 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            yum install -y tar gzip
       - attach_workspace:
           at: ~/
       - run:
